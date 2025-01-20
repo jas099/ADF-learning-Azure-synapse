@@ -1,0 +1,17 @@
+{
+	"name": "VIEWS",
+	"properties": {
+		"content": {
+			"query": "-----------------------\n--CREATE VIEWS\n-----------------------\n\nCREATE VIEW revenue_view\nAS\nSELECT * FROM OPENROWSET\n(\n    BULK 'revenue',\n    DATA_SOURCE = 'raw_ext_source',\n    FORMAT = 'CSV',\n    PARSER_VERSION = '2.0',\n    HEADER_ROW = TRUE\n)as query1\n\n\n\nselect * from revenue_cets",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "demo-serverless",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

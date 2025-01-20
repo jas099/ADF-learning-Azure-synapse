@@ -1,0 +1,17 @@
+{
+	"name": "distributed_tables",
+	"properties": {
+		"content": {
+			"query": "-----------------------\n-- ROUND ROBIN TABLE\n-------------------------\n\nCREATE table round_table\n(\n    id int,\n    name varchar(1000),\n    salary int\n)\nWITH(\n    DISTRIBUTION = ROUND_ROBIN\n)\n\n\nINSERT INTO round_table values (1, 'JG', 5000)\n\nselect * from round_table;\n\n\n----------------------\n--REPLICATE\n-----------------------\n\nCREATE SCHEMA Gold\n\n\nCREATE TABLE Gold.dim_product\n(\n    dim_key_prod int,\n    prod_id int,\n    prod_name varchar(1000)\n)\nWITH(\n    DISTRIBUTION = REPLICATE\n)\n\n\nINSERT INTO Gold.dim_product values (2,20,'Mobile')\n\nselect * from Gold.dim_product\n\n\n-------------------------------\n--HASH DISTRIBUTED\n--------------------------------\n\nCREATE TABLE Gold.facttable\n(\n    dim_key_prod int,\n    revenue int,\n    cost int\n)\nWITH(\n    DISTRIBUTION = HASH(dim_key_prod)\n)",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "demo_dedicated_pool",
+				"poolName": "demo_dedicated_pool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
